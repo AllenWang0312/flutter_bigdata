@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:bigdata/shop/pages/widgets/banner.dart';
+import 'package:bigdata/shop/pages/widgets/custom_appbar.dart';
 import 'package:bigdata/shop/route/routes.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,6 +15,10 @@ import '../config/color.dart';
 import '../main.dart';
 
 class HomePage extends StatefulWidget {
+  GlobalKey<ScaffoldState> scaffoldKey;
+
+  HomePage(this.scaffoldKey);
+
   @override
   _HomePageState createState() {
     return _HomePageState();
@@ -22,8 +27,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with AutomaticKeepAliveClientMixin {
-  var _footerKey = GlobalKey<RefreshFooterState>();
-
   @override
   bool get wantKeepAlive => true;
 
@@ -38,23 +41,33 @@ class _HomePageState extends State<HomePage>
     ScreenUtil.instance = ScreenUtil(width: 750, height: 1334)..init(context);
 
     return Scaffold(
-      backgroundColor: KColor.background,
-      appBar: AppBar(
-        title: Text(KString.homeTitle),
-      ),
-      drawer: MyDrawer(),
-      body: EasyRefresh(
-        refreshFooter: ClassicsFooter(
-          key: _footerKey,
-          bgColor: Colors.white,
-          textColor: KColor.refreshTextColor,
-          moreInfoColor: KColor.refreshTextColor,
-          showMore: true,
-          noMoreText: "我是有底线的",
-          moreInfo: KString.loading,
-          loadReadyText: KString.loadReadyText,
+        key: widget.scaffoldKey,
+        backgroundColor: KColor.background,
+        appBar: CustomAppbar(
+          title: "主页",
+          leadingWidget: InkWell(
+            onTap: () {
+              widget.scaffoldKey.currentState.openDrawer();
+            },
+            child: Icon(Icons.widgets),
+          ),
+          trailingWidget: InkWell(
+            child: Text("了解更多"),
+            onTap: () {
+              var url = "/web?url=" +
+                  Uri.encodeComponent(know_more) +
+                  "&title=" +
+                  Uri.encodeComponent("了解更多");
+              print(url);
+              MyApp.router.navigateTo(
+                context,
+                url,
+                transition: TransitionType.fadeIn,
+              );
+            },
+          ),
         ),
-        child: Column(
+        body: ListView(
           children: <Widget>[
             FutureBuilder(
               future: get('getBannerData', formData: {"type": 2}),
@@ -63,7 +76,7 @@ class _HomePageState extends State<HomePage>
                   var data = json.decode(snapshot.data.toString());
                   print(data);
                   List<Map> banners = (data['data'] as List).cast();
-                  return SwiperDiy(banners);
+                  return BannerView(banners);
                 } else {
                   return Container(
                     child: Text('加载中...'),
@@ -79,14 +92,16 @@ class _HomePageState extends State<HomePage>
                   var data = json.decode(snapshot.data.toString());
                   List<Map> list = (data['data'] as List).cast();
                   print(list);
-                  return ListView.builder(itemBuilder: (context, index) {
-                    return
-                      classItem(list[index])
+                  return ListView.builder(
+                    itemBuilder: (context, index) {
+                      return classItem(list[index])
 //                    Text(list[index]['name'])
-                    ;
-                  },
+                          ;
+                    },
                     itemCount: list.length,
-                  shrinkWrap: true,);
+                    shrinkWrap: true, //height warp
+                    physics: const NeverScrollableScrollPhysics(), //禁止滑动
+                  );
                 } else {
                   return Container(
                     child: Text('加载中...'),
@@ -95,34 +110,31 @@ class _HomePageState extends State<HomePage>
               },
             ),
           ],
-        ),
-        loadMore: () async {},
-      ),
-    );
+        ));
   }
 
   Widget classItem(Map<dynamic, dynamic> item) {
     return IntrinsicHeight(
-      child: InkWell(
-        onTap: (){
-          var cert_id=item['id'];
-          var route="${Routes.certDetail}?cert_id=$cert_id";
-          print(route);
-          MyApp.router.navigateTo(context,
+        child: InkWell(
+      onTap: () {
+        var cert_id = item['id'];
+        var route = "${Routes.certDetail}?cert_id=$cert_id";
+        print(route);
+        MyApp.router.navigateTo(
+          context,
 //Routes.certDetail,
-            route,
-              transition: TransitionType.fadeIn,
-          );
-        },
-        child: Column(
-          children: <Widget>[
-            Image.network(item['m_picture']),
-            Text(item['name']),
-            Text(item['tag'])
-          ],
-        ),
-      )
-    );
+          route,
+          transition: TransitionType.fadeIn,
+        );
+      },
+      child: Column(
+        children: <Widget>[
+          Image.network(item['m_picture']),
+          Text(item['name']),
+          Text(item['tag'])
+        ],
+      ),
+    ));
   }
 }
 
@@ -149,7 +161,7 @@ class MyDrawer extends StatelessWidget {
               children: groups(data['data']),
             );
           } else {
-            return null;
+            return Text('加载中');
           }
         });
   }

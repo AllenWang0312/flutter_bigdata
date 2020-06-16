@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
-class SwiperDiy extends StatelessWidget {
+class BannerView extends StatelessWidget {
   final List swiperDataList;
 
-  SwiperDiy(this.swiperDataList);
+  BannerView(this.swiperDataList);
 
   @override
   Widget build(BuildContext context) {

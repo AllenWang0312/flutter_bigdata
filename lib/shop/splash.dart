@@ -25,6 +25,20 @@ class _SplashState extends State<SplashPage> {
 //  String _codeCountdownStr = '获取验证码';
   int _countdownNum = 5;
 
+  @override
+  void initState() {
+    print('initState');
+    reGetCountdown();
+    if (MyApp.token.isNotEmpty) {
+      post('tokenLogin', formData: {"user_ticker": MyApp.token}).then((
+          value) => {
+      });
+    } else {
+
+    }
+    super.initState();
+  }
+
   void reGetCountdown() {
     setState(() {
       if (_countdownTimer != null) {
@@ -42,22 +56,11 @@ class _SplashState extends State<SplashPage> {
 //            _codeCountdownStr = '获取验证码';
             _countdownTimer.cancel();
             _countdownTimer = null;
-            MyApp.router.navigateTo(context, Routes.home,
-                transition: TransitionType.fadeIn,
-//                clearStack: true,
-                replace: true
-            );
+            jump();
           }
         });
       });
     });
-  }
-
-  @override
-  void initState() {
-    print('initState');
-    reGetCountdown();
-    super.initState();
   }
 
   @override
@@ -80,12 +83,12 @@ class _SplashState extends State<SplashPage> {
                 child: Container(
                   alignment: Alignment.center,
                   constraints:
-                      BoxConstraints(minWidth: 24, maxHeight: 24, maxWidth: 64),
+                  BoxConstraints(minWidth: 24, maxHeight: 24, maxWidth: 64),
                   decoration: new BoxDecoration(
 //                    border: new Border.all(width: 2.0, color: Colors.red),
                     color: Colors.grey,
                     borderRadius:
-                        new BorderRadius.all(new Radius.circular(12.0)),
+                    new BorderRadius.all(new Radius.circular(12.0)),
 //                    image: new DecorationImage(
 //                      image: new NetworkImage(
 //                          'http://h.hiphotos.baidu.com/zhidao/wh%3D450%2C600/sign=0d023672312ac65c67506e77cec29e27/9f2f070828381f30dea167bbad014c086e06f06c.jpg'),
@@ -129,6 +132,20 @@ class _SplashState extends State<SplashPage> {
       );
     } else {
       return back;
+    }
+  }
+
+  void jump() {
+    if (MyApp.token.isNotEmpty) {
+      MyApp.router.navigateTo(context, Routes.index,
+          transition: TransitionType.fadeIn,
+//                clearStack: true,
+          replace: true);
+    } else {
+      MyApp.router.navigateTo(context, Routes.login,
+          transition: TransitionType.fadeIn,
+//                clearStack: true,
+          replace: true);
     }
   }
 }

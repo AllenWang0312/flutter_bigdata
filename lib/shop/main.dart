@@ -19,7 +19,10 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  static String token ="";
+  static String token = "";
+
+//  set(value) {}
+
   static final router = Router();
 
   MyApp() {

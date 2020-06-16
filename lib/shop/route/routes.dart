@@ -5,10 +5,12 @@ import 'package:flutter/cupertino.dart';
 
 class Routes{
   static String root = "/";
-
-  static String home ="/home";
+  static String login ="/login";
+  static String index ="/index";
   static String web ="/web";
   static String certDetail ="/cert/detail";
+  static String setting='/user/setting';
+  static String userinfo='/user/info';
 
   static void configureRoutes(Router router){
     router.notFoundHandler = new Handler(
@@ -18,8 +20,13 @@ class Routes{
       }
     );
     router.define(root, handler: splashHandler);
-    router.define(home, handler: homeHandler);
+    router.define(index, handler: indexHandler);
+    router.define(login, handler: loginHandler);
+
     router.define(web, handler: webViewHandler);
     router.define(certDetail, handler: certDetailHandler);
+
+    router.define(setting, handler: userInfoHandler);
+    router.define(userinfo, handler: userInfoHandler);
   }
 }
