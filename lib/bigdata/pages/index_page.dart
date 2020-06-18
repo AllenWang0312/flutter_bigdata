@@ -1,14 +1,12 @@
-import 'package:bigdata/shop/pages/cart_page.dart';
-import 'package:bigdata/shop/pages/learn_page.dart';
-import 'package:bigdata/shop/pages/mine_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provide/provide.dart';
-import '../../shop/config/index.dart';
-import '../../shop/provide/current_index_provide.dart';
-
-import 'apps_page.dart';
+import '../config/index.dart';
+import '../../custom/provide/current_index_provide.dart';
 import 'home_page.dart';
+import 'message_page.dart';
+import 'mine_page.dart';
+
 
 class IndexPage extends StatelessWidget {
 
@@ -26,11 +24,10 @@ class IndexPage extends StatelessWidget {
 
 
   List<Widget> tabBodies() {
-    GlobalKey<ScaffoldState> scaffoldState = GlobalKey<ScaffoldState>();
-    final home = HomePage(scaffoldState);
+
     return [
-      home,
-      LearnPage(),
+      HomePage(),
+      MessagePage(),
       MinePage(),
     ];
   }
@@ -46,7 +43,6 @@ class IndexPage extends StatelessWidget {
       builder: (context, child, val) {
         return Scaffold(
           backgroundColor: Color.fromRGBO(244, 244, 244, 1.0),
-          drawer: MyDrawer(),
           body: IndexedStack(
             index: val.value,
             children: tabBodies(),

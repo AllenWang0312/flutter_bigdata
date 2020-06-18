@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:bigdata/shop/pages/widgets/toolbar.dart';
-import 'package:bigdata/shop/service/http_service.dart';
+import '../../custom/widgets/toolbar.dart';
+import '../service/http_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

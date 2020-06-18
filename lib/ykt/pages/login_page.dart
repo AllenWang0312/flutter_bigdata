@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:bigdata/shop/config/color.dart';
-import 'package:bigdata/shop/main.dart';
-import 'package:bigdata/shop/pages/widgets/custom_appbar.dart';
-import 'package:bigdata/shop/route/routes.dart';
-import 'package:bigdata/shop/service/http_service.dart';
+import '../config/color.dart';
+import '../main.dart';
+import '../../custom/widgets/custom_appbar.dart';
+import '../route/routes.dart';
+import '../service/http_service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';

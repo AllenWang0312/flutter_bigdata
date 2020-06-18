@@ -1,4 +1,4 @@
-import 'package:bigdata/shop/pages/widgets/custom_appbar.dart';
+import '../../custom/widgets/custom_appbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';

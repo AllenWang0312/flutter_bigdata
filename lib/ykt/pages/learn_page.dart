@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:bigdata/shop/main.dart';
-import 'package:bigdata/shop/service/http_service.dart';
+import '../main.dart';
+import '../service/http_service.dart';
 import 'package:flutter/material.dart';
 
 class LearnPage extends StatefulWidget {

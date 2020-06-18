@@ -1,6 +1,6 @@
-import 'package:bigdata/shop/model/menu.dart';
-import 'package:bigdata/shop/pages/widgets/custom_appbar.dart';
-import 'package:bigdata/shop/route/routes.dart';
+import '../model/menu.dart';
+import '../../custom/widgets/custom_appbar.dart';
+import '../route/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

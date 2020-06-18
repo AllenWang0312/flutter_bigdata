@@ -1,9 +1,9 @@
 
 import 'dart:convert';
 
-import 'package:bigdata/shop/config/index.dart';
-import 'package:bigdata/shop/pages/widgets/banner.dart';
-import 'package:bigdata/shop/service/http_service.dart';
+import '../config/index.dart';
+import '../../custom/widgets/banner.dart';
+import '../service/http_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 

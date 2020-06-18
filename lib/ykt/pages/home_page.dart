@@ -1,15 +1,15 @@
 import 'dart:convert';
 
-import 'package:bigdata/shop/pages/widgets/banner.dart';
-import 'package:bigdata/shop/pages/widgets/custom_appbar.dart';
-import 'package:bigdata/shop/route/routes.dart';
+import '../../custom/widgets/banner.dart';
+import '../../custom/widgets/custom_appbar.dart';
+import '../route/routes.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:bigdata/shop/config/index.dart';
-import 'package:bigdata/shop/service/http_service.dart';
+import '../config/index.dart';
+import '../service/http_service.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import '../config/color.dart';
 import '../main.dart';

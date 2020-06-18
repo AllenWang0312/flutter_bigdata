@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:bigdata/shop/service/http_service.dart';
+import '../service/http_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
