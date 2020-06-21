@@ -7,7 +7,7 @@ Future get(key, {formData}) async {
   try {
     Response response;
     Dio dio = new Dio();
-    dio.options.contentType = 'application:x-www-form-urlencode';
+//    dio.options.contentType = 'application:x-www-form-urlencode';
     if (formData == null) {
       response = await dio.get(servicePath[key]);
     } else {
@@ -27,7 +27,7 @@ Future post(key, {formData}) async {
   try {
     Response response;
     Dio dio = new Dio();
-//    dio.options.contentType = 'application:x-www-form-urlencode';
+//    dio.options.contentType =  ContentType.parse('application/x-www-form-urlencode').toString();
     if (formData == null) {
       response = await dio.post(servicePath[key]);
     } else {
@@ -39,7 +39,7 @@ Future post(key, {formData}) async {
       throw Exception('后端接口异常,请检查代码');
     }
   } catch (e) {
-    print('error:::${e}');
+    print('error -> ${e}');
   }
 }
 

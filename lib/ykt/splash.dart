@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'route/routes.dart';
 import 'service/http_service.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -19,7 +21,6 @@ class SplashPage extends StatefulWidget {
 
 class _SplashState extends State<SplashPage> {
   String _cover = '';
-
   Timer _countdownTimer;
 
 //  String _codeCountdownStr = '获取验证码';
@@ -27,15 +28,12 @@ class _SplashState extends State<SplashPage> {
 
   @override
   void initState() {
-    print('initState');
+//    print('initState');
     reGetCountdown();
     if (MyApp.token.isNotEmpty) {
-      post('tokenLogin', formData: {"user_ticker": MyApp.token}).then((
-          value) => {
-      });
-    } else {
-
-    }
+      post('tokenLogin', formData: {"user_ticker": MyApp.token})
+          .then((value) => {});
+    } else {}
     super.initState();
   }
 
@@ -50,7 +48,7 @@ class _SplashState extends State<SplashPage> {
         setState(() {
           if (_countdownNum > 0) {
             _countdownNum--;
-            print('timer');
+//            print('timer');
 //            _codeCountdownStr = '${_countdownNum--}重新获取';
           } else {
 //            _codeCountdownStr = '获取验证码';
@@ -83,12 +81,12 @@ class _SplashState extends State<SplashPage> {
                 child: Container(
                   alignment: Alignment.center,
                   constraints:
-                  BoxConstraints(minWidth: 24, maxHeight: 24, maxWidth: 64),
+                      BoxConstraints(minWidth: 24, maxHeight: 24, maxWidth: 64),
                   decoration: new BoxDecoration(
 //                    border: new Border.all(width: 2.0, color: Colors.red),
                     color: Colors.grey,
                     borderRadius:
-                    new BorderRadius.all(new Radius.circular(12.0)),
+                        new BorderRadius.all(new Radius.circular(12.0)),
 //                    image: new DecorationImage(
 //                      image: new NetworkImage(
 //                          'http://h.hiphotos.baidu.com/zhidao/wh%3D450%2C600/sign=0d023672312ac65c67506e77cec29e27/9f2f070828381f30dea167bbad014c086e06f06c.jpg'),
@@ -118,7 +116,7 @@ class _SplashState extends State<SplashPage> {
             var data = json.decode(snapshot.data.toString());
             List<Map> banners = (data['data'] as List).cast();
             _cover = banners[0]['imageurl'];
-            print(_cover);
+//            print(_cover);
             back = CachedNetworkImage(
               imageUrl: _cover,
 //                    placeholder: (context, url) => CircularProgressIndicator(),
@@ -135,8 +133,11 @@ class _SplashState extends State<SplashPage> {
     }
   }
 
-  void jump() {
-    if (MyApp.token.isNotEmpty) {
+  jump() async {
+    var sp = await SharedPreferences.getInstance();
+    MyApp.token = sp.get('token');
+
+    if (null!=MyApp.token&&MyApp.token.isNotEmpty) {
       MyApp.router.navigateTo(context, Routes.index,
           transition: TransitionType.fadeIn,
 //                clearStack: true,

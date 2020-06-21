@@ -36,7 +36,6 @@ class IndexPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provide = Provide.value<BNBIndexObservable>(context);
 
     ScreenUtil.instance = ScreenUtil(width: 750, height: 1334)
       ..init(context);

@@ -12,6 +12,7 @@ class AppsPage extends StatefulWidget {
 }
 
 class _AppsPageState extends State<AppsPage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,16 +23,17 @@ class _AppsPageState extends State<AppsPage> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             var data = json.decode(snapshot.data.toString());
+            print(data);
             List<Map> list = (data['data'] as List).cast();
-            return SingleChildScrollView(
-              child: ListView.builder(itemBuilder: (context, index) {
+            return ListView.builder(
+              itemCount: list.length,
+              itemBuilder: (context, index) {
                 return inflateItem(list[index]);
-              },itemCount: list.length,),
-            );
+              },);
           } else {
-            return Container(
-              child: Text('加载中...'),
-            );
+          return Container(
+          child: Text('加载中...'),
+          );
           }
         },
       ),

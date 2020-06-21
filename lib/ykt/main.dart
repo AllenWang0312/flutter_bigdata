@@ -1,3 +1,5 @@
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'route/routes.dart';
 import 'splash.dart';
 import 'package:fluro/fluro.dart';
@@ -12,6 +14,9 @@ void main() {
   var currentIndexProvide = BNBIndexObservable(0);
   var providers = Providers();
   providers..provide(Provider<BNBIndexObservable>.value(currentIndexProvide));
+
+
+
   runApp(ProviderNode(
     child: MyApp(),
     providers: providers,
@@ -20,9 +25,6 @@ void main() {
 
 class MyApp extends StatelessWidget {
   static String token = "";
-
-//  set(value) {}
-
   static final router = Router();
 
   MyApp() {

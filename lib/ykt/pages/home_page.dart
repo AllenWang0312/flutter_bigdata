@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage>
   @override
   void initState() {
     super.initState();
-    print('首页刷新了');
+//    print('首页刷新了');
   }
 
   @override
@@ -58,7 +58,7 @@ class _HomePageState extends State<HomePage>
                   Uri.encodeComponent(know_more) +
                   "&title=" +
                   Uri.encodeComponent("了解更多");
-              print(url);
+//              print(url);
               MyApp.router.navigateTo(
                 context,
                 url,
@@ -74,7 +74,7 @@ class _HomePageState extends State<HomePage>
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   var data = json.decode(snapshot.data.toString());
-                  print(data);
+//                  print(data);
                   List<Map> banners = (data['data'] as List).cast();
                   return BannerView(banners);
                 } else {
@@ -91,7 +91,7 @@ class _HomePageState extends State<HomePage>
                 if (snapshot.hasData) {
                   var data = json.decode(snapshot.data.toString());
                   List<Map> list = (data['data'] as List).cast();
-                  print(list);
+//                  print(list);
                   return ListView.builder(
                     itemBuilder: (context, index) {
                       return classItem(list[index])
@@ -119,7 +119,7 @@ class _HomePageState extends State<HomePage>
       onTap: () {
         var cert_id = item['id'];
         var route = "${Routes.certDetail}?cert_id=$cert_id";
-        print(route);
+//        print(route);
         MyApp.router.navigateTo(
           context,
 //Routes.certDetail,
@@ -155,7 +155,7 @@ class MyDrawer extends StatelessWidget {
         future: post("mv2/cert/class"),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            print(snapshot.data.toString());
+//            print(snapshot.data.toString());
             Map data = json.decode(snapshot.data.toString());
             return ListView(
               children: groups(data['data']),

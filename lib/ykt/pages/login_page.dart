@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '../config/color.dart';
 import '../main.dart';
 import '../../custom/widgets/custom_appbar.dart';
@@ -136,11 +138,13 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-  void onLoginSuccess(dynamic data) {
+  onLoginSuccess(dynamic data) async {
     if (null == data['name']) {
     } else if (null == data['class_id'] || 0 == data['class_id']) {
     } else {
       MyApp.token = data['user_ticket'];
+      var sp = await SharedPreferences.getInstance();
+      sp.setString('token', MyApp.token);
       var path = Routes.index +
           '?class_id=' +
           data['class_id'] +

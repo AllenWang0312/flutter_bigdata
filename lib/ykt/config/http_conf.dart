@@ -1,3 +1,8 @@
+import 'package:bigdata/bigdata/main.dart';
+import 'package:bigdata/bigdata/route/routes.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
 const base_url = 'http://api.9first.com//';
 
 const servicePath = {
@@ -6,6 +11,7 @@ const servicePath = {
   'accountLogin': base_url + 'authorization/client/login',
   'getCertListForLearn': base_url + 'mv2/user/course/cert-list',
   'getCourseLearnGson': base_url + 'mv2/user/course/learn-course',
+  'getMineInfo': base_url + 'mv2/user/info/personhome',
   //get
   'getBannerData': base_url + 'mv2/home/topad',
   'getUserInfo': base_url + 'mv2/user/info/detail',
@@ -18,3 +24,23 @@ const servicePath = {
 
 const h5_host = "https://special.9first.com";
 const know_more = h5_host + "/special/9first_app/h5/more/";
+
+bool hasError(dynamic data, BuildContext context) {
+  var hasError = false;
+  var status = data['status'];
+  var errCode = data['errCode'];
+  var errMsg = data['errMsg'];
+  if (errMsg.toString().isNotEmpty) {
+    Fluttertoast.showToast(msg: errMsg);
+    hasError = true;
+  }
+  if (errCode.toString() == "2002") {
+    MyApp.router.pop(context);
+    MyApp.router.navigateTo(context, Routes.login);
+    hasError = true;
+  }
+  if (status != '0') {
+    hasError = true;
+  }
+  return hasError;
+}
