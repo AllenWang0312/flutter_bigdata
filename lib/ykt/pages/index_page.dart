@@ -26,9 +26,8 @@ class IndexPage extends StatelessWidget {
 
   List<Widget> tabBodies() {
     GlobalKey<ScaffoldState> scaffoldState = GlobalKey<ScaffoldState>();
-    final home = HomePage(scaffoldState);
     return [
-      home,
+      HomePage(scaffoldState),
       LearnPage(),
       MinePage(),
     ];
@@ -36,27 +35,25 @@ class IndexPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     ScreenUtil.instance = ScreenUtil(width: 750, height: 1334)
       ..init(context);
 
     return Provide<BNBIndexObservable>(
-      builder: (context, child, val) {
+      builder: (context, child, obser) {
         return Scaffold(
-          backgroundColor: Color.fromRGBO(244, 244, 244, 1.0),
+//          backgroundColor: Color.fromRGBO(244, 244, 244, 1.0),
           drawer: MyDrawer(),
           body: IndexedStack(
-            index: val.value,
+            index: obser.value,
             children: tabBodies(),
           ),
           bottomNavigationBar: BottomNavigationBar(
             items: bottomTabs,
             type: BottomNavigationBarType.fixed,
             onTap: (index) {
-              val.changeIndex(index);
+              obser.changeIndex(index);
             },
           ),
-
         );
       },
     );

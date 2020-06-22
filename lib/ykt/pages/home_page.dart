@@ -6,11 +6,9 @@ import '../route/routes.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../config/index.dart';
 import '../service/http_service.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
 import '../config/color.dart';
 import '../main.dart';
 

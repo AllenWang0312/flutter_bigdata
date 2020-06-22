@@ -26,8 +26,8 @@ class _LearnPageState extends State<LearnPage> {
 
   @override
   void initState() {
-    initData();
-    initTabs();
+//    initData();
+//    initTabs();
     super.initState();
   }
 
