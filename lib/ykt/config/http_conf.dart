@@ -1,9 +1,10 @@
-import 'package:bigdata/bigdata/main.dart';
-import 'package:bigdata/bigdata/route/routes.dart';
-import 'package:flutter/cupertino.dart';
+import '../route/routes.dart';
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-const base_url = 'http://api.9first.com//';
+import '../main.dart';
+
+const base_url = 'https://api.9first.com//';
 
 const servicePath = {
   //post
@@ -17,7 +18,8 @@ const servicePath = {
   'getUserInfo': base_url + 'mv2/user/info/detail',
   'getClasses': base_url + 'mv2/cert/class',
   'getClassList': base_url + 'mv2/cert/list',
-  'getCertDetail': base_url + 'mv2/cert/detail'
+  'getCertDetail': base_url + 'mv2/cert/detail',
+  'getCourseInfo': base_url+'mv2/user/course/list',
 //  'getUserInfo':base_url+'mv2/user/info/detail',
 //  'getUserInfo':base_url+'mv2/user/info/detail',
 };
@@ -30,16 +32,16 @@ bool hasError(dynamic data, BuildContext context) {
   var status = data['status'];
   var errCode = data['errCode'];
   var errMsg = data['errMsg'];
-  if (errMsg.toString().isNotEmpty) {
+  if (null != errMsg && errMsg.toString().isNotEmpty) {
     Fluttertoast.showToast(msg: errMsg);
     hasError = true;
   }
-  if (errCode.toString() == "2002") {
+  if (null!=errCode && errCode.toString() == "2002") {
     MyApp.router.pop(context);
     MyApp.router.navigateTo(context, Routes.login);
     hasError = true;
   }
-  if (status != '0') {
+  if (status != 1) {
     hasError = true;
   }
   return hasError;

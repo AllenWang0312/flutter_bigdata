@@ -35,6 +35,8 @@ class IndexPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final provide = Provide.value<BNBIndexObservable>(context);
+
     ScreenUtil.instance = ScreenUtil(width: 750, height: 1334)
       ..init(context);
 
@@ -44,14 +46,14 @@ class IndexPage extends StatelessWidget {
 //          backgroundColor: Color.fromRGBO(244, 244, 244, 1.0),
           drawer: MyDrawer(),
           body: IndexedStack(
-            index: obser.value,
+            index: provide.value,
             children: tabBodies(),
           ),
           bottomNavigationBar: BottomNavigationBar(
             items: bottomTabs,
             type: BottomNavigationBarType.fixed,
             onTap: (index) {
-              obser.changeIndex(index);
+              provide.changeIndex(index);
             },
           ),
         );

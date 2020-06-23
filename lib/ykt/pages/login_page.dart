@@ -103,6 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                       onTap: () {
                         var account = account_controller.text;
                         var psw = psw_controller.text;
+                        print(account+psw);
                         if (account.isNotEmpty && psw.isNotEmpty) {
                           login(context, account, psw);
                         } else {
@@ -120,6 +121,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Function callback(BuildContext context, dynamic snapshot) {
     var value = json.decode(snapshot.toString());
+    print(value);
     var errCode = value['errCode'];
     var msg = value['msg'];
     var data = value['data'];

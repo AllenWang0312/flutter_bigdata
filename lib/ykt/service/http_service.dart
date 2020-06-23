@@ -7,7 +7,8 @@ Future get(key, {formData}) async {
   try {
     Response response;
     Dio dio = new Dio();
-//    dio.options.contentType = 'application:x-www-form-urlencode';
+    dio.options.contentType = Headers.jsonContentType;
+//    dio.options.contentType(ContentType.json);
     if (formData == null) {
       response = await dio.get(servicePath[key]);
     } else {
@@ -27,7 +28,7 @@ Future post(key, {formData}) async {
   try {
     Response response;
     Dio dio = new Dio();
-//    dio.options.contentType =  ContentType.parse('application/x-www-form-urlencode').toString();
+    dio.options.contentType = Headers.jsonContentType;
     if (formData == null) {
       response = await dio.post(servicePath[key]);
     } else {

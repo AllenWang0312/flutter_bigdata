@@ -44,7 +44,8 @@ var certDetailHandler = Handler(
 
 var settingHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-  return SettingPage();
+      dynamic info = params["info"].first;
+  return SettingPage(info);
 });
 var userInfoHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {

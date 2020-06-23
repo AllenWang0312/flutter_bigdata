@@ -38,6 +38,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: KColor.primaryColor,
+        platform: TargetPlatform.iOS,
       ),
       home: SplashPage(),
       onGenerateRoute: router.generator,

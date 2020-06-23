@@ -26,7 +26,7 @@ class Routes{
     router.define(web, handler: webViewHandler);
     router.define(certDetail, handler: certDetailHandler);
 
-    router.define(setting, handler: userInfoHandler);
+    router.define(setting, handler: settingHandler);
     router.define(userinfo, handler: userInfoHandler);
   }
 }
